@@ -14,10 +14,10 @@ RUN npm install
 RUN ng build
 
 # Set the working directory to the root of the project
-WORKDIR /app
+WORKDIR /app/dist
 
 # Copy the back-end source code
-COPY /dist/src ./
+COPY src ./
 
 # Install back-end app dependencies
 RUN npm install
