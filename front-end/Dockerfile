@@ -2,7 +2,7 @@
 FROM node:16
 
 # Create a directory for your app inside the container
-WORKDIR /app
+WORKDIR /app/front-end
 
 # Install Angular CLI globally (if not already installed)
 RUN npm install
