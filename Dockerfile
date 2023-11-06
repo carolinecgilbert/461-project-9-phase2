@@ -2,14 +2,17 @@
 FROM node:16
 
 # Create a directory for your app inside the container
-WORKDIR /app
+WORKDIR /app/front-end
 
 # Install Angular CLI globally (if not already installed)
-RUN cd front-end && npm install
-RUN cd front-end && npm install -g @angular/cli
+RUN npm install
+RUN npm install -g @angular/cli
 
 # Build dist directory
-RUN cd front-end && ng build
+RUN ng build
+
+# Create a directory for your app inside the container
+WORKDIR /app
 
 # Copy the contents of the dist directory into the container
 COPY ./dist /app/dist
