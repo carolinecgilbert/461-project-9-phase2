@@ -10,6 +10,9 @@ COPY package*.json ./
 # Install front-end app dependencies
 RUN npm install
 
+# Install angular cli
+RUN npm install -g @angular/cli
+
 # Build the front-end Angular app
 RUN ng build
 
