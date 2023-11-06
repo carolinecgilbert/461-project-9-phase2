@@ -1,32 +1,27 @@
 # Use an official Node.js runtime as a parent image
 FROM node:16
 
-# Set the working directory to the front-end directory within the dist directory
-WORKDIR /app/dist/front-end
+# Create a directory for your app inside the container
+WORKDIR /app
 
-# Copy the package.json and package-lock.json files for the front-end
-COPY package*.json ./
+# Install Angular CLI globally (if not already installed)
+RUN cd front-end && npm install
+RUN cd front-end && npm install -g @angular/cli
 
-# Install front-end app dependencies
-RUN sudo npm install
+# Build dist directory
+RUN cd front-end && ng build
 
-# Install angular cli
-RUN sudo npm install -g @angular/cli
+# Copy the contents of the dist directory into the container
+COPY ./dist /app/dist
 
-# Build the front-end Angular app
-RUN ng build
+# Copy the contents of the front-end directory into the container
+COPY ./front-end /app/front-end
 
-# Set the working directory to the root of the project
-WORKDIR /app/dist
-
-# Copy the back-end source code
-COPY src ./
-
-# Install back-end app dependencies
+# Install app dependencies
 RUN npm install
 
 # Expose ports (if applicable)
 EXPOSE 9000 4200
 
-# Define the command to run the back-end and front-end
-CMD [ "node", "app.js" ] 
+# Define the command to run your app
+CMD [ "node", "app.js" ]
