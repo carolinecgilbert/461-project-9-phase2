@@ -17,7 +17,7 @@ RUN ng build
 WORKDIR /app
 
 # Copy the back-end source code
-COPY dist/src ./
+COPY /dist/src ./
 
 # Install back-end app dependencies
 RUN npm install
